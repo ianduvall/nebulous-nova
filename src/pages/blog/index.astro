@@ -1,12 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
-import Header from "../components/Header.astro";
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/Card.astro";
+import Header from "../../components/Header.astro";
 ---
 
 <Layout title="Welcome to Astro.">
 	<Header>
-		<h1 slot="text" class="text-gradient">Welcome</h1>
+		<h1 slot="text" class="text-gradient">Blog</h1>
 	</Header>
 	<main>
 		<p class="instructions">
@@ -15,7 +15,7 @@ import Header from "../components/Header.astro";
 			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
 		</p>
 		<ul role="list" class="link-card-grid">
-			<Card href="/blog" title="Blog" body="Explore writing" />
+			<Card href="/blog/page-1" title="Page 1" body="Read Page 1" />
 			<Card
 				href="https://astro.build/integrations/"
 				title="Integrations"

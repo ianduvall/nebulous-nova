@@ -1,0 +1,19 @@
+---
+import ThemeSwitcher from "./ThemeSwitcher.astro";
+
+export interface Props {}
+---
+
+<header>
+  <div><slot name="text" /></div>
+  <ThemeSwitcher />
+</header>
+
+<style>
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: var(--size-5);
+  }
+</style>

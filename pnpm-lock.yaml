@@ -2,9 +2,11 @@ lockfileVersion: 5.4
 
 specifiers:
   astro: ^1.6.0
+  open-props: 1.4.21
 
 dependencies:
   astro: 1.6.3
+  open-props: 1.4.21
 
 packages:
 
@@ -2503,6 +2505,10 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       mimic-fn: 4.0.0
+    dev: false
+
+  /open-props/1.4.21:
+    resolution: {integrity: sha512-W0rW9lHWl7ZBDPMmvA/3RqJjhLP61fWWU3/wEmY0uVPr+68DXrxy+Wa5IfgujLLwfFoVkrSeQMXhWtv62/v2Ng==}
     dev: false
 
   /open/8.4.0:
