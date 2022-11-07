@@ -2,10 +2,14 @@
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import Header from "../components/Header.astro";
+
+const { cookies } = Astro;
+
+const theme = cookies.get("theme").value as "light" | "dark" | undefined;
 ---
 
-<Layout title="Welcome to Astro.">
-	<Header>
+<Layout title="Welcome to Astro." theme={theme}>
+	<Header theme={theme}>
 		<h1 slot="text" class="text-gradient">Welcome</h1>
 	</Header>
 	<main>

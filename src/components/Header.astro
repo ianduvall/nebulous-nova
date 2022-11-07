@@ -1,19 +1,25 @@
 ---
-import ThemeSwitcher from "./ThemeSwitcher.astro";
+import ThemeSwitcher, {
+	type Props as ThemeSwitcherProps,
+} from "./ThemeSwitcher.astro";
 
-export interface Props {}
+export interface Props {
+	theme: ThemeSwitcherProps["theme"];
+}
+
+const { theme } = Astro.props;
 ---
 
 <header>
-  <div><slot name="text" /></div>
-  <ThemeSwitcher />
+	<div><slot name="text" /></div>
+	<ThemeSwitcher theme={theme} />
 </header>
 
 <style>
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-block: var(--size-5);
-  }
+	header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-block: var(--size-5);
+	}
 </style>

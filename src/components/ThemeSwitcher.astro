@@ -1,30 +1,40 @@
 ---
-export interface Props {}
+export interface Props {
+	theme: undefined | string;
+}
+
+const { theme } = Astro.props;
 ---
 
-<form>
+<form action="/api/theme" method="post">
 	<label for="theme-switcher" class="visually-hidden">Theme</label>
-	<select id="theme-switcher" name="theme">
-		<option value="">Auto</option>
-		<option value="light">Light</option>
-		<option value="dark">Dark</option>
+	<select id="theme-switcher" name="theme" onchange="this.form.submit()">
+		<option value="" selected={theme !== "light" && theme !== "dark"}>
+			System
+		</option>
+		<option value="light" selected={theme === "light"}>Light</option>
+		<option value="dark" selected={theme === "dark"}>Dark</option>
+
+		<button type="submit"
+			>Change theme
+
+			<script>
+				const changeThemeDataAttribute = (theme: string) => {
+					if (theme === "light" || theme === "dark") {
+						document.documentElement.dataset.theme = theme;
+					} else {
+						delete document.documentElement.dataset.theme;
+					}
+				};
+				document
+					.querySelector("#theme-switcher")
+					?.addEventListener("change", (e: Event) => {
+						if (!(e.target instanceof HTMLSelectElement)) return;
+
+						const theme: string = (e.target as HTMLSelectElement).value || "";
+						changeThemeDataAttribute(theme);
+					});
+			</script>
+		</button>
 	</select>
 </form>
-
-<script>
-	const changeThemeDataAttribute = (theme: string) => {
-		if (theme === "light" || theme === "dark") {
-			document.documentElement.dataset.theme = theme;
-		} else {
-			delete document.documentElement.dataset.theme;
-		}
-	};
-	document
-		.querySelector("#theme-switcher")
-		?.addEventListener("change", (e: Event) => {
-			if (!(e.target instanceof HTMLSelectElement)) return;
-
-			const theme: string = (e.target as HTMLSelectElement).value || "";
-			changeThemeDataAttribute(theme);
-		});
-</script>
