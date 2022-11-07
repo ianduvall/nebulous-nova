@@ -7,7 +7,7 @@
 		"astro": "astro",
 		"build": "astro build",
 		"dev": "astro dev",
-		"preview": "astro preview",
+		"preview": "wrangler pages dev ./dist",
 		"start": "astro dev"
 	},
 	"dependencies": {
@@ -17,5 +17,9 @@
 	},
 	"prettier": {
 		"useTabs": true
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^3.18.0",
+		"wrangler": "2.1.15"
 	}
 }

@@ -1,0 +1,4 @@
+name = "nebulous-nova"
+main = "./workers/index.mts"
+compatibility_date = "2022-11-07"
+
