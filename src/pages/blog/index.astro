@@ -3,9 +3,13 @@ import Layout from "../../layouts/Layout.astro";
 import Card from "../../components/Card.astro";
 import Header from "../../components/Header.astro";
 
-const { cookies } = Astro;
+const { cookies, params, url } = Astro;
+console.log(params, url);
 
 const theme = cookies.get("theme").value as "light" | "dark" | undefined;
+
+const text = await (await fetch("/api/counter/post-1")).text();
+console.log(text);
 ---
 
 <Layout title="Welcome to Astro." theme={theme}>
@@ -13,6 +17,7 @@ const theme = cookies.get("theme").value as "light" | "dark" | undefined;
 		<h1 slot="text" class="text-gradient">Blog</h1>
 	</Header>
 	<main>
+		<p>{url}</p>
 		<p class="instructions">
 			To get started, open the directory <code>src/pages</code> in your project.<br
 			/>

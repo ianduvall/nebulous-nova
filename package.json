@@ -7,7 +7,7 @@
 		"astro": "astro",
 		"build": "astro build",
 		"dev": "astro dev",
-		"preview": "pnpm build && pnpm wrangler pages dev ./dist",
+		"preview": "pnpm build && pnpm wrangler pages dev ./dist --kv COUNTERS",
 		"start": "astro dev"
 	},
 	"dependencies": {

@@ -1,0 +1,76 @@
+---
+import type { MarkdownLayoutProps } from "astro";
+import { getRuntime, type PagesRuntime } from "@astrojs/cloudflare/runtime";
+
+import "/src/styles/global.css";
+
+/* the props */
+import "open-props/style";
+
+/* optional imports that use the props */
+import "open-props/normalize";
+import "open-props/switch/light";
+import "open-props/switch/dark";
+import "open-props/buttons";
+
+interface Props
+	extends MarkdownLayoutProps<{
+		title: string;
+	}> {}
+
+const {
+	cookies,
+	props: { frontmatter, file },
+	request,
+} = Astro;
+console.log(Astro.props);
+
+const slug = file.split("/").at(-1)?.replace(".md", "") ?? "";
+console.log(slug);
+
+const theme = cookies.get("theme").value as "light" | "dark" | undefined;
+
+const runtime = getRuntime(request) as PagesRuntime<
+	{
+		COUNTERS: KVNamespace<string>;
+	},
+	{}
+>;
+const COUNTERS = runtime.env.COUNTERS;
+const counterId = slug;
+
+const value = Number((await COUNTERS.get(counterId)) || 0);
+---
+
+<!DOCTYPE html>
+<html lang="en" data-theme={theme}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="color-scheme" content="dark light" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{frontmatter.title}</title>
+	</head>
+	<body>
+		<slot />
+		<p>Likes: {value}</p>
+		<form action={`/api/counters/${slug}`} method="post">
+			<button type="submit">Like</button>
+		</form>
+
+		<style is:global>
+			:root {
+				--brand: var(--teal-5);
+				--accent-gradient: var(--gradient-4);
+			}
+			html {
+				font-family: system-ui, sans-serif;
+			}
+			code {
+				font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+					DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+			}
+		</style>
+	</body>
+</html>
