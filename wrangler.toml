@@ -1,3 +1,13 @@
 name = "nebulous-nova"
+main = "./dist/index.mjs"
 compatibility_date = "2022-11-08"
 
+[build]
+command = "npm install && npm run build"
+
+[durable_objects]
+bindings = [{name = "COUNTER", class_name = "CounterDO"}]
+
+[[migrations]]
+tag = "v1" # Should be unique for each entry
+new_classes = ["CounterDO"]
